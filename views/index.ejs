@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Araba Bilgileri</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="#contact">İletişim</a>
+            <a href="https://izu.edu.tr/" target="_blank">İZÜ Web Sayfası</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h1>Araba Listesi</h1>
+            <form action="/filtrele" method="POST">
+                <input type="text" name="anahtarKelime" placeholder="Araba adı ile ara" value="<%= anahtarKelime %>">
+                <button type="submit">Ara</button>
+            </form>
+            <% if (mesaj) { %>
+                <p><%= mesaj %></p>
+            <% } %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Marka</th>
+                        <th>Model</th>
+                        <th>Donanım</th>
+                        <th>Motor</th>
+                        <th>Yakıt</th>
+                        <th>Vites</th>
+                        <th>Fiyat</th>
+                        <th>Web Sitesi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% arabalar.forEach(araba => { %>
+                        <tr>
+                            <td><%= araba.marka %></td>
+                            <td><%= araba.model %></td>
+                            <td><%= araba.donanim %></td>
+                            <td><%= araba.motor %></td>
+                            <td><%= araba.yakit %></td>
+                            <td><%= araba.vites %></td>
+                            <td>₺<%= araba.fiyat %></td>
+                            <td><a href="<%= araba.websitesi %>" target="_blank">Web Sitesi</a></td>
+                        </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </section>
+        
+        <section id="contact">
+            <h2>İletişim Formu</h2>
+            <% if (mesaj && mesaj !== 'Not Found') { %>
+                <p><%= mesaj %></p>
+            <% } %>
+            <form action="/iletisim" method="POST" style="margin: 0 25%;">
+                <label for="adSoyad">Ad Soyad:</label>
+                <input type="text" id="adSoyad" name="adSoyad" required>
+                <label for="email">E-posta:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="telefon">Telefon:</label>
+                <input type="tel" id="telefon" name="telefon" required>
+                <label for="mesaj">Mesaj:</label>
+                <textarea id="mesaj" name="mesaj" required></textarea>
+                <button type="submit">Gönder</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
