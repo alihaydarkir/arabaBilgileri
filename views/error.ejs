@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hata <%= kod %> - Araba Bilgileri</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .error-container {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .error-code {
+            font-size: 6em;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .error-message {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .error-description {
+            color: #7f8c8d;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        .back-home {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Ana Sayfa</a>
+            <a href="#contact">İletişim</a>
+            <a href="https://izu.edu.tr/" target="_blank">İZÜ Web Sayfası</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="error-container">
+            <div class="error-code"><%= kod %></div>
+            <h1 class="error-message"><%= mesaj %></h1>
+            
+            <% if (kod === 404) { %>
+                <p class="error-description">
+                    Aradığınız sayfa bulunamadı. Sayfa silinmiş, taşınmış olabilir veya yanlış adres girmiş olabilirsiniz.
+                </p>
+            <% } else if (kod === 500) { %>
+                <p class="error-description">
+                    Sunucu hatası oluştu. Lütfen daha sonra tekrar deneyin. Sorun devam ederse bizimle iletişime geçin.
+                </p>
+            <% } else { %>
+                <p class="error-description">
+                    Beklenmeyen bir hata oluştu. Ana sayfaya dönerek tekrar deneyebilirsiniz.
+                </p>
+            <% } %>
+            
+            <a href="/" class="back-home">Ana Sayfaya Dön</a>
+        </div>
+    </main>
+</body>
+</html>
